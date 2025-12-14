@@ -4,6 +4,11 @@ import { SignUpPage, LoginPage, PostPage } from './components';
 export const routes: Routes = [
     {
         path: '',
+        redirectTo: 'signup',
+        pathMatch: 'full'
+    },
+    {
+        path: 'signup',
         component: SignUpPage
     },
     {

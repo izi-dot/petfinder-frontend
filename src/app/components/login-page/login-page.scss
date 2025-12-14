@@ -1,1 +1,40 @@
-@import '../signup-page/signup-page.scss';
+@use 'vars' as *;
+
+.subtitle {
+  font-size: 0.9375rem;
+  color: $text-light;
+  margin: 0 0 $spacing-2xl 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.form-footer {
+  text-align: center;
+  margin-top: $spacing-xl;
+  padding-top: $spacing-lg;
+  border-top: 1px solid $border-color;
+
+  p {
+    font-size: 0.875rem;
+    color: $text-light;
+    margin: 0;
+  }
+}
+
+.card {
+  animation: slideUp 0.4s ease-out;
+}
+
+.btn-primary {
+  text-transform: uppercase;
+}
