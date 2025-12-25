@@ -9,34 +9,43 @@
   </div>
   <hr>
 
-  <div class="card">
-    <div class="header">
-      <div class="avatar"></div>
-      <div>
-        <div class="name">Martin Kučiak</div>
-        <div class="time">14 hrs. ago</div>
+  @for (post of posts; track post.id) {
+    <div class="card">
+      <div class="header">
+        <div class="avatar"></div>
+        <div>
+          <div class="name">{{ post.createdBy }}</div>
+          <div class="time">{{ post.createAt }}</div>
+        </div>
+        <div class="location">{{ post.location }}</div>
       </div>
-      <div class="location">Nové Mesto nad Váhom</div>
-    </div>
 
 
-    <div class="title">Meno zvieraťa</div>
+      <div class="title">{{ post.petName }}</div>
 
 
-    <div class="image-wrapper">
-      <!-- TODO dorobit slider -->
-      <!-- <div class="nav left"><</div> -->
-      <img class="pets-pics" src="/images/cat.avif" alt="Cat" />
-      <!-- <div class="nav right">></div> -->
-    </div>
-
-
-    <div class="footer">
-      <div class="likes">
-        <div class="toggle"></div>
-        <span>56</span>
+      <div class="image-wrapper">
+        <!-- TODO dorobit slider -->
+        <!-- <div class="nav.left"><</div> -->
+        <img class="pets-pics" src="/images/cat.avif" alt="Cat" />
+        <!-- <div class="nav.right">></div> -->
       </div>
-      <div class="status">✔ solved</div>
+
+
+      <div class="footer">
+        <div class="likes">
+          <div class="toggle"></div>
+          <span>{{ post.intractionsCount }}</span>
+        </div>
+
+        @if (post.solved) {
+          <div class="status">✔ solved</div>
+        } @else {
+          <div class="status">X unsolved</div>
+        }
+      </div>
     </div>
-  </div>
+  } @empty {
+    <p>No items found</p>
+  }
 </div>
