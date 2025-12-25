@@ -3,8 +3,9 @@ export class Post {
   createdBy?: string;
   createAt?: string;
   petName?: string;
-  location?: string; // NOve mesto
+  location?: string;
   photos?: string[];
   intractionsCount?: number;
   solved?: boolean;
+  userAvatar?: string[];
 }

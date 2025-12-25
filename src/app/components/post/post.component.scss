@@ -15,20 +15,24 @@
   align-items: center;
   gap: 10px;
   margin-bottom: 12px;
+
   .avatar {
     width: 32px;
     height: 32px;
     border-radius: 50%;
     background: #000;
   }
+
   .name {
     font-weight: 600;
     font-size: 14px;
   }
+
   .time {
     font-size: 12px;
     color: #777;
   }
+
   .location {
     margin-left: auto;
     background: #c5c5c5;
@@ -37,6 +41,7 @@
     font-size: 12px;
     color: #444;
   }
+
   .title {
     font-size: 16px;
     font-weight: 600;
@@ -49,11 +54,12 @@
   position: relative;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid #e5e5e5;
+  
   .image-wrapper img {
     width: 100%;
     display: block;
   }
+
   //obrazky zvierat
   .pets-pics {
     max-width: 100%;
@@ -61,7 +67,7 @@
   }
 }
 
-
+//TODO urobit slider pre viac obrazkov
 // .nav.left { left: 8px; }
 // .nav.right { right: 8px; }
 
@@ -75,10 +81,12 @@
   margin-left: 20px;
   font-size: 14px;
   color: #444;
+
   //solved + checkmark
   .status {
     margin-left: 2rem;
   }
+
   //pocet komentov
   .likes {
   display: flex;
