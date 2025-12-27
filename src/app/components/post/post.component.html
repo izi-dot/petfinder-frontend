@@ -12,9 +12,9 @@
   <div class="title">{{ post?.petName }}</div>
 
 
-  @if (post?.photos && post?.photos?.length !== 0) {
+  @if (post?.photos) {
     <div class="image-wrapper">
-      <img class="pets-pics" [src]="post?.photos?.[0]" alt="Pet" />
+      <img class="pets-pics" [src]="post?.photos" alt="Pet" />
     </div>
   }
 

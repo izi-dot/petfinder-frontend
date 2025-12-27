@@ -4,8 +4,8 @@ export class Post {
   createAt?: string;
   petName?: string;
   location?: string;
-  photos?: string[];
+  photos?: string;
   intractionsCount?: number;
   solved?: boolean;
-  userAvatar?: string[];
+  userAvatar?: string;
 }
