@@ -10,10 +10,14 @@
   <hr>
 
   <div class="posts-wrapper">
-    @for (post of posts; track post.id) {
-      <app-post [post]="post"/>
-    } @empty {
-      <p>No items found</p>
+    @if (posts && posts.length !== 0) {
+      @for (post of posts; track post.id) {
+        <app-post [post]="post"/>
+      } @empty {
+        <p>No items found</p>
+      }
+    } @else {
+      <p>Loading...</p>
     }
   </div>
 </div>

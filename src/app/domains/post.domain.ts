@@ -1,11 +1,11 @@
 export class Post {
   id?: string;
   createdBy?: string;
-  createAt?: string;
+  userAvatar?: string;
+  createdAt?: string;
   petName?: string;
   location?: string;
   photos?: string;
-  intractionsCount?: number;
+  interactionsCount?: number;
   solved?: boolean;
-  userAvatar?: string;
 }
