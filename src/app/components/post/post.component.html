@@ -1,9 +1,9 @@
 <div class="card">
   <div class="header">
-    <div class="avatar"></div>
+    <img class="avatarPic" [src]="post?.userAvatar" alt="Avatar">
     <div>
       <div class="name">{{ post?.createdBy }}</div>
-      <div class="time">{{ post?.createAt }}</div>
+      <div class="time">{{ post?.createdAt }}</div>
     </div>
     <div class="location">{{ post?.location }}</div>
   </div>
@@ -22,7 +22,7 @@
   <div class="footer">
     <div class="likes">
       <div class="toggle"></div>
-      <span>{{ post?.intractionsCount }}</span>
+      <span>{{ post?.interactionsCount }}</span>
     </div>
 
     @if (post?.solved) {
