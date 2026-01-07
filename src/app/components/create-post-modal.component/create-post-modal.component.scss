@@ -1,0 +1,98 @@
+@use 'vars' as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  padding: 2rem;
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+
+    .form-input{
+      width: 30%;
+    }
+  }
+}
+
+//popis postu
+#description  {
+  width: 80%;
+  height: 200px;
+  resize: none;
+}
+
+.upload-container {
+  display: flex;
+  flex-wrap: wrap;
+  height: 170px;
+}
+
+//cela upload photo sekcia 
+.upload-box {
+  border: 2px dashed #c7d2fe;
+  background: white;
+  border-radius: 14px;
+  padding: 40px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block;
+  position: absolute;
+  z-index: 10;
+}
+
+.upload-box:hover {
+  border-color: #6366f1;
+  background: #f0f2ff;
+}
+
+.upload-icon {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.upload-text {
+  color: #4b5563;
+  font-size: 15px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.image-preview {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 97%;
+
+  //preview obrazku
+  img {
+    display: block;
+    width: 300px;
+    border-radius: 10px;
+  }
+}
+
+#publish-btn {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 1em 2em;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+#publish-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+

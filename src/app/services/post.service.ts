@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from './http-client.service';
-import { Post } from '../domains';
+import { NewPostRequest, Post } from '../domains';
 import { Observable } from 'rxjs';
 
 
@@ -15,4 +15,7 @@ export class PostService {
     return this.httpService.get<Post[]>('/posts');
   }
 
+  createPost(request: NewPostRequest): Observable<void> {
+    return this.httpService.post<NewPostRequest>('/post', request);
+  }
 }

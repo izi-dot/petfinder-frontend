@@ -1,0 +1,76 @@
+<form [formGroup]="form" class="form">
+  <div class="form-group">
+    <label for="petName" class="form-label">Name of pet</label>
+    <input
+      type="text" 
+      id="petName" 
+      class="form-input" 
+      formControlName="petName"
+      name="petName"
+      placeholder="e.g. Max"/>
+    @if (form.get('petName')?.invalid && form.get('petName')?.touched) {
+      <div class="error">Pet name is required.</div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="location" class="form-label">City</label>
+    <input 
+      type="text" 
+      id="location" 
+      formControlName="location"
+      class="form-input" 
+      name="location"
+      placeholder="e.g. Nové Mesto nad Váhom"/>
+    @if (form.get('location')?.invalid && form.get('location')?.touched) {
+      <div class="error">Location is required.</div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="description" class="form-label">Description</label>
+    <textarea 
+      maxlength="1500"
+      id="description" 
+      formControlName="description"
+      class="form-input" 
+      name="description"  
+      placeholder="Tell others about your pet, its behavior, and when it went missing"></textarea>
+    @if (form.get('description')?.invalid && form.get('description')?.touched) {
+      <div class="error">
+        @if (form.get('description')?.hasError('required')) {
+          Description is required.
+        }
+      </div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="addPhoto" class="form-label">Photo greatly increases chances of finding your pet</label>
+  </div>
+
+  <div class="form-group">
+    <div class="upload-container">
+      <div>
+        <label for="imageUpload" class="upload-box" (click)="photoTouched()">
+          <span class="upload-icon">📷</span>
+          <span class="upload-text">Click or drag image to upload</span>
+          <input type="file" id="imageUpload" accept="image/*" (change)="onFileSelected($event)">
+        </label>
+      </div>
+  
+      <div class="image-preview">
+        @if (imagePreview) {
+          <img id="imagePreview" [src]="imagePreview" width="200" alt="preview" />
+        }  
+      </div>
+    </div>
+  </div>
+  @if (form.get('photo')?.touched && form.get('photo')?.invalid) {
+    <div class="error">Photo is required.</div>
+  }
+  <button type="submit" class="btn-primary" id="publish-btn" (click)="submitForm()" [disabled]="form.invalid">Publish</button>
+</form>
+
+
+  
