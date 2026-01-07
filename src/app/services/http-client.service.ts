@@ -27,7 +27,7 @@ export class HttpClientService {
   }
 
   // POST request
-  post<T>(endpoint: string, data: any): Observable<T> {
+  post<T>(endpoint: string, data: T): Observable<any> {
     return this.http.post<T>(`${this.baseUrl}${endpoint}`, data)
       .pipe(
         catchError(this.handleError)
@@ -35,7 +35,7 @@ export class HttpClientService {
   }
 
   // PUT request
-  put<T>(endpoint: string, data: any): Observable<T> {
+  put<T>(endpoint: string, data: T): Observable<T> {
     return this.http.put<T>(`${this.baseUrl}${endpoint}`, data)
       .pipe(
         catchError(this.handleError)
