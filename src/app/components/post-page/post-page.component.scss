@@ -1,5 +1,12 @@
+@use 'vars' as *;
+
 .search-wrapper {
-  position: relative;
+  margin-bottom: 1rem;
+  padding-top: $spacing-md;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #e2ebf0;
 
   .search-bar {
     margin: 1rem auto;
@@ -14,7 +21,7 @@
 
   div {
     position: absolute;
-    top: 0;
+    top: $spacing-md;
     right: 1rem;
     display: flex;
     align-items: center;
@@ -29,6 +36,86 @@
   }
 }
 
+.nav-container {
+  top: $spacing-md;
+  width: fit-content;
+  left: 0;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-brand {
+  font-weight: 700;
+  color: #111827;
+  text-decoration: none;
+  font-size: 1.125rem;
+}
+
+
+.nav-pages {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+
+.nav-link {
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  color: #374151;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.18s, color 0.18s;
+
+  &:hover {
+    background: #f3f4f6;
+    color: #111827;
+  }
+}
+
+// Responsive: collapse nav into toggle on small screens
+@media (max-width: 720px) {
+  .nav-container {
+    align-items: center;
+  }
+
+  .nav-toggle {
+    display: block;
+    margin-left: 0.5rem;
+  }
+
+  .nav-pages {
+    // position: absolute;
+    // top: 56px; // adjust to navbar height
+    // left: 0;
+    background: #fff;
+    flex-direction: column;
+    gap: 0;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 6px 20px rgba(17, 24, 39, 0.08);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.18s ease;
+    pointer-events: none;
+  }
+
+  .nav-pages.open {
+    transform: scaleY(1);
+    pointer-events: auto;
+  }
+
+  .nav-link {
+    width: 100%;
+    padding: 0.75rem 0.5rem;
+  }
+}
+
+
 .page-container {
   align-items: initial;
   justify-content: unset;
@@ -40,7 +127,7 @@ hr {
   height: 3px;
   background-color: #ffffff;
   width: 100%;
-  margin-bottom: 2rem;
+  margin: 0;
 }
 
 .posts-wrapper {

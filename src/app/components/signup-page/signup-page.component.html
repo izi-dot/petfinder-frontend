@@ -2,17 +2,20 @@
   <div class="card">
     <h1>Welcome to PetFinder</h1>
     <p class="subtitle">Join a community dedicated to reuniting lost pets with their owners.</p>
-
-    <form class="form" (ngSubmit)="onSubmit()" #signupForm="ngForm">
+    
+    <form [formGroup]="form" class="form">
       <div class="form-group">
         <label for="firstName" class="form-label">First Name</label>
         <input
           type="text"
           id="firstName"
           class="form-input"
+          formControlName="firstName"
           name="firstName"
-          [(ngModel)]="userObject.firstName"
           placeholder="Enter your first name"/>
+        @if (form.get('firstName')?.invalid && form.get('firstName')?.touched) {
+          <div class="error">First name is required.</div>
+        }
       </div>
 
       <div class="form-group">
@@ -21,9 +24,12 @@
           type="text"
           id="lastName"
           class="form-input"
+          formControlName="lastName"
           name="lastName"
-          [(ngModel)]="userObject.lastName"
           placeholder="Enter your last name"/>
+        @if (form.get('lastName')?.invalid && form.get('lastName')?.touched) {
+          <div class="error">Last name is required.</div>
+        } 
       </div>
 
       <div class="form-group">
@@ -32,9 +38,12 @@
           type="email"
           id="email"
           class="form-input"
+          formControlName="email"
           name="email"
-          [(ngModel)]="userObject.email"
           placeholder="Enter your email"/>
+        @if (form.get('email')?.invalid && form.get('email')?.touched) {
+          <div class="error">Email is required.</div>
+        }
       </div>
 
       <div class="form-group">
@@ -43,12 +52,15 @@
           type="password"
           id="password"
           class="form-input"
+          formControlName="password"
           name="password"
-          [(ngModel)]="userObject.password"
           placeholder="Enter your password"/>
+        @if (form.get('password')?.invalid && form.get('password')?.touched) {
+          <div class="error">Password is required.</div>
+        }
       </div>
 
-      <button type="submit" class="btn-primary">Sign Up</button>
+      <button type="submit" class="btn-primary" (click)="submitForm()" [disabled]="form.invalid">Sign Up</button>
     </form>
 
     <div class="form-footer">

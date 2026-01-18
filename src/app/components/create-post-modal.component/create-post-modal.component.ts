@@ -57,8 +57,6 @@ export class CreatePostModalComponent {
     }
 
     const request: NewPostRequest = {
-      userAvatar: 'https://www.dobrenoviny.sk/images/article_webp/157736/0/0/1552476269.png', //todo,
-      createdBy: 'Aladin', // todo
       petName: this.form.value.petName,
       location: this.form.value.location,
       description: this.form.value.description,
@@ -67,7 +65,7 @@ export class CreatePostModalComponent {
     this.postService.createPost(request).subscribe({
       next: () => {
         console.log('Post created successfully');
-        this.dialog.closeAll();
+        this.dialog.closeAll(); 
       },
       error: (error) => {
         console.error('Error creating post', error);
@@ -78,4 +76,5 @@ export class CreatePostModalComponent {
   photoTouched(): void {
     this.form.get('photo')?.markAsTouched();
   }
+  
 } 
