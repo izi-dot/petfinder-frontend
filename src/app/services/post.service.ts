@@ -11,11 +11,11 @@ export class PostService {
 
   constructor(private httpService: HttpClientService) {}
 
-  getPosts(): Observable<Post[]> {
-    return this.httpService.get<Post[]>('/posts');
+  getPosts(searchQuery?: string): Observable<Post[]> {
+    return this.httpService.getWithParams<Post[]>('/posts', {search: searchQuery});
   }
 
   createPost(request: NewPostRequest): Observable<void> {
-    return this.httpService.post<NewPostRequest>('/post', request);
+    return this.httpService.post<void>('/post', request);
   }
 }

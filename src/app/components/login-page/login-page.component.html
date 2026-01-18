@@ -1,7 +1,7 @@
 <div class="page-container">
   <div class="card">
     <h1>Welcome back</h1>
-    <form class="form" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <form [formGroup]="form" class="form">
 
       <div class="form-group">
         <label for="email" class="form-label">Email Address</label>
@@ -9,9 +9,12 @@
           type="email"
           id="email"
           class="form-input"
+          formControlName="email"
           name="email"
-          [(ngModel)]="userObject.email"
           placeholder="Enter your email"/>
+        @if (form.get('email')?.invalid && form.get('email')?.touched) {
+          <div class="error">Email is required.</div>
+        }
       </div>
 
       <div class="form-group">
@@ -20,12 +23,15 @@
           type="password"
           id="password"
           class="form-input"
+          formControlName="password"
           name="password"
-          [(ngModel)]="userObject.password"
           placeholder="Enter your password"/>
+        @if (form.get('password')?.invalid && form.get('password')?.touched) {
+          <div class="error">Password is required.</div>
+        }
       </div>
 
-      <button type="submit" class="btn-primary">Log In</button>
+      <button type="submit" class="btn-primary" (click)="submitForm()" [disabled]="form.invalid">Log In</button>
     </form>
 
     <div class="form-footer">
@@ -33,5 +39,3 @@
     </div>
   </div>
 </div>
-
-

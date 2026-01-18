@@ -1,13 +1,26 @@
 <div class="page-container">
   <div class="search-wrapper">
-    <input type="search" class="search-bar" placeholder="Search lost pet"/>
+      <div class="nav-container">
+        <a class="nav-brand">PetFinder</a>
+
+        <ul class="nav-pages">
+          <li class="nav-item"><a class="nav-link" href="/">Sign Up</a></li>
+          <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+          <li class="nav-item"><a class="nav-link" href="/post">Posts</a></li>
+        </ul>
+      </div>
+    <form [formGroup]="form" class="form">
+      <input type="search" placeholder="Search..."class="search-bar" placeholder="Search lost pet" formControlName="searchQuery"/>
+    </form>
 
     <div>
       <img (click)="openAddPetDialog()" class="header-icons" src="/images/add.png" alt="add post"/>
-      <img class="header-icons" src="/images/user.png" alt="user"/>
+      @if (isLoggedIn()) {
+        <img (click)="logout()" class="header-icons" src="/images/user.png" alt="user"/>
+      }
     </div>
+    <hr>
   </div>
-  <hr>
 
   <div class="posts-wrapper">
     @if (posts && posts.length !== 0) {
