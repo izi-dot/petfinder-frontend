@@ -1,0 +1,25 @@
+<div class="post-detail">
+  <app-post [post]="post"/>
+
+  <div class="description-wrapper">
+    <div class="description">{{ post?.description }}</div>
+    <form [formGroup]="form" class="form">
+      <input class="comment-input" type="text" placeholder="Join the conversation" formControlName="comment" (keydown.enter)="sendComment()"/>
+    </form>
+  </div>  
+  <hr>
+  <div class="comments-section">
+    <div class="comments-wrapper">
+      @if (post?.comments) {
+        @for (comment of post?.comments; track comment.id) {   
+          <div class="comment">
+            <div class="user">{{ comment.user.firstName }} {{ comment.user.lastName }}</div>
+            <div class="comment-body">{{ comment.comment }}</div>
+          </div> 
+        } @empty {
+          <p>No comments found</p>
+        }
+      }
+    </div>
+  </div>
+</div>

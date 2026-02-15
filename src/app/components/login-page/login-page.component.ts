@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup, ReactiveFormsModule } from '@angula
 import { LoginRequest } from '../../domains';
 import { AuthService } from '../../services';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login-page',
@@ -17,6 +18,7 @@ export class LoginPageComponent {
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
+              private toastrService: ToastrService,
               private router: Router) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -38,6 +40,7 @@ export class LoginPageComponent {
     this.authService.login(request).subscribe({
       next: () => {
         console.warn('Login successful');
+        this.toastrService.success("Great! You're in.");
         this.router.navigate(['/post']);
       },
       error: (error) => {

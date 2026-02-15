@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { SignUpPageComponent, LoginPageComponent, PostPageComponent } from './components';
+import { SignUpPageComponent, LoginPageComponent, PostPageComponent, PostDetailPageComponent } from './components';
 
 export const routes: Routes = [
     {
@@ -19,4 +19,8 @@ export const routes: Routes = [
         path: 'post',
         component: PostPageComponent
     },
+    {
+        path: 'post/:id', 
+        component: PostDetailPageComponent
+    }
 ];

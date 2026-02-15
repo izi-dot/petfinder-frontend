@@ -16,6 +16,13 @@ export class CreatePostModalComponent {
   imagePreview: string | ArrayBuffer | null = null;
 
   form: FormGroup;
+  animals: Record<string, string[]> = {
+    cat: ['Siberian', 'Persian', 'British Shorthair'],
+    dog: ['Retriever', 'Bulldog', 'Beagle'],
+    parrot: ['African Grey', 'Cockatoo', 'Macaw']
+  };
+  breeds: string[] = [];
+  
 
   constructor(private fb: FormBuilder,
               private postService: PostService,
@@ -24,7 +31,14 @@ export class CreatePostModalComponent {
       petName: ['', Validators.required],
       location: ['', Validators.required],
       description: ['', Validators.required],
+      animal: ['', Validators.required],
+      breed: ['', Validators.required],
       photo: [null, Validators.required]
+    });
+
+    this.form.get('animal')?.valueChanges.subscribe(value => {
+      this.breeds = this.animals[value] || [];
+      this.form.get('breed')?.setValue('');
     });
   }
 
@@ -58,6 +72,8 @@ export class CreatePostModalComponent {
 
     const request: NewPostRequest = {
       petName: this.form.value.petName,
+      animalType: this.form.value.animal,
+      breed: this.form.value.breed,
       location: this.form.value.location,
       description: this.form.value.description,
       photos: this.form.value.photo
