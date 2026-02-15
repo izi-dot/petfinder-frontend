@@ -14,6 +14,45 @@
   </div>
 
   <div class="form-group">
+    <label for="animal" class="form-label">Type</label>
+    <label class="form-input">
+      <input type="radio" formControlName="animal" value="cat">
+      Cat
+    </label>
+
+    <label class="form-input" >
+      <input type="radio" formControlName="animal" value="dog">
+      Dog
+    </label>
+
+    <label class="form-input">
+      <input type="radio" formControlName="animal" value="parrot">
+      Parrot
+    </label>
+
+    @if (form.get('animal')?.invalid && form.get('animal')?.touched) {
+      <div class="error">Animal is required.</div>
+    }
+  </div>
+
+  <div class="form-group">
+    @if (breeds.length > 0) {
+      <label for="breed" class="form-label">Breed</label>
+      <select class="form-input" formControlName="breed">
+        @for (breed of breeds; track $index) {
+          <option [value]="breed">
+            {{ breed }}
+          </option>
+        }
+      </select>
+    }
+
+    @if (form.get('breed')?.invalid && form.get('breed')?.touched) {
+      <div class="error">Breed is required.</div>
+    }
+  </div>
+
+  <div class="form-group">
     <label for="location" class="form-label">City</label>
     <input 
       type="text" 
@@ -58,12 +97,11 @@
           <input type="file" id="imageUpload" accept="image/*" (change)="onFileSelected($event)">
         </label>
       </div>
-  
-      <div class="image-preview">
-        @if (imagePreview) {
-          <img id="imagePreview" [src]="imagePreview" width="200" alt="preview" />
-        }  
-      </div>
+    </div>
+    <div class="image-preview">
+      @if (imagePreview) {
+        <img id="imagePreview" [src]="imagePreview" width="200" alt="preview" />
+      }  
     </div>
   </div>
   @if (form.get('photo')?.touched && form.get('photo')?.invalid) {

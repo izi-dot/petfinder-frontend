@@ -3,14 +3,16 @@ import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http'
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpClientService {
   private baseUrl: string = environment.apiUrl;
+  
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toastrService: ToastrService) {}
 
   // Set base URL dynamically
   setBaseUrl(url: string): void {
@@ -22,7 +24,9 @@ export class HttpClientService {
     return this.http.get<T>(`${this.baseUrl}${endpoint}`)
       .pipe(
         retry(1),
-        catchError(this.handleError)
+        catchError(error => {
+          return this.handleError(error);
+        })
       );
   }
 
@@ -30,7 +34,9 @@ export class HttpClientService {
   post<T>(endpoint: string, data: any): Observable<T> {
     return this.http.post<T>(`${this.baseUrl}${endpoint}`, data)
       .pipe(
-        catchError(this.handleError)
+        catchError(error => {
+          return this.handleError(error);
+        })
       );
   }
 
@@ -38,7 +44,9 @@ export class HttpClientService {
   put<T>(endpoint: string, data: any): Observable<T> {
     return this.http.put<T>(`${this.baseUrl}${endpoint}`, data)
       .pipe(
-        catchError(this.handleError)
+        catchError(error => {
+          return this.handleError(error);
+        })
       );
   }
 
@@ -46,7 +54,9 @@ export class HttpClientService {
   delete<T>(endpoint: string): Observable<T> {
     return this.http.delete<T>(`${this.baseUrl}${endpoint}`)
       .pipe(
-        catchError(this.handleError)
+        catchError(error => {
+          return this.handleError(error);
+        })
       );
   }
 
@@ -62,7 +72,9 @@ export class HttpClientService {
     return this.http.get<T>(`${this.baseUrl}${endpoint}`, { params: httpParams })
       .pipe(
         retry(1),
-        catchError(this.handleError)
+        catchError(error => {
+          return this.handleError(error);
+        })
       );
   }
 
@@ -80,10 +92,10 @@ export class HttpClientService {
       // Handle specific status codes
       switch (error.status) {
         case 400:
-          errorMessage = 'Bad Request: ' + (error.error?.message || 'Invalid data');
+          errorMessage = error.error?.message;
           break;
         case 401:
-          errorMessage = 'Unauthorized: Please login again';
+          errorMessage = error.error?.message;
           break;
         case 403:
           errorMessage = 'Forbidden: Access denied';
@@ -92,12 +104,13 @@ export class HttpClientService {
           errorMessage = 'Not Found: Resource not available';
           break;
         case 500:
-          errorMessage = 'Internal Server Error: Please try again later';
+          errorMessage = 'Internal Server Error: ' + (error.error?.message);
           break;
       }
     }
 
     console.error(errorMessage);
+    this.toastrService.error(errorMessage);
     return throwError(() => new Error(errorMessage));
   }
 }

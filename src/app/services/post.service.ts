@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from './http-client.service';
-import { NewPostRequest, Post } from '../domains';
+import { AddCommentRequest, NewPostRequest, Post } from '../domains';
 import { Observable } from 'rxjs';
 
 
@@ -15,7 +15,16 @@ export class PostService {
     return this.httpService.getWithParams<Post[]>('/posts', {search: searchQuery});
   }
 
+  getPost(id?: string): Observable<Post> {
+    return this.httpService.get<Post>(`/post/${id}`);
+  }
+
   createPost(request: NewPostRequest): Observable<void> {
     return this.httpService.post<void>('/post', request);
   }
+
+  sendComment(request: AddCommentRequest): Observable<void> {
+    return this.httpService.post<void>('/comment', request);
+  }
+  
 }

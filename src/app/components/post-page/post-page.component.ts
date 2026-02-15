@@ -3,8 +3,9 @@ import { Post } from '../../domains';
 import { PostService, AuthService } from '../../services';
 import { PostComponent } from '../post/post.component';
 import { MatDialog } from '@angular/material/dialog';
-import { CreatePostModalComponent } from '../create-post-modal.component/create-post-modal.component';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreatePostModalComponent } from '../create-post-modal/create-post-modal.component';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-post-page',
@@ -22,7 +23,8 @@ export class PostPageComponent {
     private fb: FormBuilder,
     private postService: PostService,
     private dialog: MatDialog,
-    private authService: AuthService) {
+    private authService: AuthService, 
+    private toastrService: ToastrService) {
 
     this.form = this.fb.group({
       searchQuery: [''],
@@ -39,11 +41,11 @@ export class PostPageComponent {
   }
 
   openAddPetDialog() {
-
     if (!this.isLoggedIn()) {
-      window.alert('You must be logged in to create a post.');
+      this.toastrService.error("Login required to complete this action.");
       return;
     }
+
     this.dialog.open(CreatePostModalComponent, {
       width: '50vw',
       height: '80vh',

@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup, ReactiveFormsModule } from '@angula
 import { RegisterRequest } from '../../domains';
 import { AuthService } from '../../services';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup-page',
@@ -16,7 +17,8 @@ export class SignUpPageComponent {
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private toastrService: ToastrService) {
     this.form = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -41,6 +43,7 @@ export class SignUpPageComponent {
     this.authService.register(request).subscribe({
       next: () => {
         console.warn('Registration successful');
+        this.toastrService.success("Registration completed successfully.");
         this.router.navigate(['/post']);
       },
       error: (error) => {

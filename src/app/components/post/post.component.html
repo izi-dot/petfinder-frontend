@@ -1,11 +1,18 @@
-<div class="card">
+<div class="card" (click)="openPostDetail()">
   <div class="header">
     <img class="avatarPic" [src]="post?.userAvatar" alt="Avatar">
-    <div>
-      <div class="name">{{ post?.createdBy }}</div>
-      <div class="time">{{ post?.createdAt }}</div>
+    <div class="metadata-container">
+      <div>
+        <div class="name">{{ post?.createdBy }}</div>
+        <div class="time">{{  getLocalTimeString() }}</div>
+      </div>
+      <div class="metadata-right">
+        <div>
+          <div class="location">{{ post?.location }}</div>
+        </div>
+        <div class="breed">{{ post?.animalType }} • {{post?.breed}}</div>
+      </div>
     </div>
-    <div class="location">{{ post?.location }}</div>
   </div>
 
 
@@ -22,7 +29,11 @@
   <div class="footer">
     <div class="likes">
       <div class="toggle"></div>
-      <span>{{ post?.interactionsCount }}</span>
+      @if (post?.comments) {
+        <span>{{ post?.comments?.length }}</span>
+      } @else {
+        <span>0</span>
+      }
     </div>
 
     <!-- TODO  @if (post?.solved) {
