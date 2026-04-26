@@ -16,7 +16,7 @@
     <div>
       <img (click)="openAddPetDialog()" class="header-icons" src="/images/add.png" alt="add post"/>
       @if (isLoggedIn()) {
-        <img (click)="logout()" class="header-icons" src="/images/user.png" alt="user"/>
+        <img (click)="toggleSidebar()" class="header-icons" src="/images/user.png" alt="user"/>
       }
     </div>
     <hr>
@@ -25,12 +25,18 @@
   <div class="posts-wrapper">
     @if (posts && posts.length !== 0) {
       @for (post of posts; track post.id) {
-        <app-post [post]="post"/>
+        <app-post [post]="post"
+                  (onSearchBy)="searchBy($event)"/>
       } @empty {
         <p>No items found</p>
       }
     } @else {
-      <p>Loading...</p>
+      <p>No items found</p>
     }
   </div>
 </div>
+
+<app-sidebar
+  [isOpen]="isSidebarOpen"
+  (closed)="toggleSidebar()"
+  (getMyPosts)="getPosts($event)"/>

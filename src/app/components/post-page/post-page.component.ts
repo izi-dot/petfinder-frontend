@@ -6,10 +6,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreatePostModalComponent } from '../create-post-modal/create-post-modal.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-post-page',
-  imports: [PostComponent, ReactiveFormsModule],
+  imports: [PostComponent, ReactiveFormsModule, SidebarComponent],
   templateUrl: './post-page.component.html',
   styleUrl: './post-page.component.scss',
 })
@@ -18,6 +19,7 @@ export class PostPageComponent {
 
   posts?: Post[];
   form: FormGroup;
+  isSidebarOpen = false;
 
   constructor(
     private fb: FormBuilder,
@@ -61,8 +63,12 @@ export class PostPageComponent {
     return this.authService.isLoggedIn();
   }
 
-  logout(): void {
-    this.authService.logout();
+  searchBy(query: string): void {
+    this.getPosts(query);
+  }
+
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
   }
   
 }
