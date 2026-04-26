@@ -1,0 +1,39 @@
+ @if (isOpen) {
+  <div class="backdrop" @fade (click)="close()"></div>
+  <div class="sidebar" @slide role="dialog" aria-modal="true">
+    <div class="sidebar-header">
+      <span>My Account</span>
+      <button class="closeBtn" (click)="close()">✕</button>
+    </div>
+    
+    <div class="sidebar-body">
+      @if (user?.email) {
+        <div class="info">
+          <span class="bold">Email: </span>
+          <span>{{ user?.email }}</span>
+        </div>
+      }
+      @if (user?.firstName) {
+        <div class="info">
+          <span class="bold">First Name: </span>
+          <span>{{ user?.firstName }}</span>
+        </div>
+      }
+      @if (user?.lastName) {
+        <div class="info">
+          <span class="bold">Last Name: </span>
+          <span>{{ user?.lastName }}</span>
+        </div>
+      }
+
+      <div class="myPosts">
+        <button class="btn-primary" (click)="onGetMyPosts()">See My Posts</button>
+      </div>  
+    </div>
+
+    <div class="sidebar-footer">
+      <!-- TODO zfunkcit tento button <button id="btnDelete" class="btn-primary">Delete Account</button> -->
+      <button id="btnLogOut" class="btn-primary" (click)="logout()">Log Out</button>
+    </div>
+  </div>
+}

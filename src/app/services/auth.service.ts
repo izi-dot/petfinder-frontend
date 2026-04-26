@@ -3,6 +3,14 @@ import { HttpClientService } from "./http-client.service";
 import { Router } from "@angular/router";
 import { BehaviorSubject, Observable, tap } from "rxjs";
 import { AuthResponse, LoginRequest, RegisterRequest, User } from "../domains";
+import { decodeJwt } from "../utils";
+
+export interface JwtPayload {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -60,5 +68,11 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return !!this.getToken();
+  }
+
+  getUser(): JwtPayload | undefined {
+    const token = this.getToken();
+    if (!token) return undefined;
+    return decodeJwt<JwtPayload>(token);
   }
 }

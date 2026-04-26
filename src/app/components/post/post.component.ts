@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Post } from '../../domains';
 import { Router } from '@angular/router';
 
@@ -13,6 +13,9 @@ export class PostComponent {
   @Input({required: true})
   post?: Post;
 
+  @Output()
+  onSearchBy = new EventEmitter<string>();
+
   constructor(private router: Router) {}
   
   openPostDetail(): void {
@@ -25,4 +28,9 @@ export class PostComponent {
     }
     return this.post?.createdAt;
   }
-}
+
+  searchBy(value: string | undefined, event: MouseEvent): void {
+    event.stopPropagation();
+    this.onSearchBy.emit(value);
+  }
+} 

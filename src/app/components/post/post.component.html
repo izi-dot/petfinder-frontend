@@ -3,14 +3,18 @@
     <img class="avatarPic" [src]="post?.userAvatar" alt="Avatar">
     <div class="metadata-container">
       <div>
-        <div class="name">{{ post?.createdBy }}</div>
+        <div (click)="searchBy(post?.createdBy, $event)" class="name">{{ post?.createdBy }}</div>
         <div class="time">{{  getLocalTimeString() }}</div>
       </div>
       <div class="metadata-right">
         <div>
-          <div class="location">{{ post?.location }}</div>
+          <div class="location" (click)="searchBy(post?.location, $event)">{{ post?.location }}</div>
         </div>
-        <div class="breed">{{ post?.animalType }} • {{post?.breed}}</div>
+        <div class="breed">
+          <span class="animalType" (click)="searchBy(post?.animalType, $event)">{{ post?.animalType }}</span>
+          <span>&nbsp;•&nbsp;</span>
+          <span class="kind" (click)="searchBy(post?.breed, $event)">{{ post?.breed }}</span>
+        </div>
       </div>
     </div>
   </div>

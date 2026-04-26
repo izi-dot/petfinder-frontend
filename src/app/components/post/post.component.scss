@@ -29,6 +29,10 @@
     font-weight: 600;
     font-size: 14px;
   }
+  
+  .name:hover, .animalType:hover, .kind:hover, .location:hover {
+    text-decoration: underline;
+  }
 
   .time {
     font-size: 12px;
